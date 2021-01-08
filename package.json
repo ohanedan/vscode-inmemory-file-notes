@@ -18,14 +18,127 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:inmemoryFileNotes-explorer"
+  ],
   "main": "./out/main.js",
-  "contributes": {},
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "inmemoryFileNotes-explorer",
+          "title": "Inmemory File Notes",
+          "icon": "resources/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "inmemoryFileNotes-explorer": [
+        {
+          "id": "inmemoryFileNotes-explorer",
+          "name": "Notes"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "inmemoryFileNotes.note.new",
+          "group": "navigation",
+          "when": "view == inmemoryFileNotes-explorer"
+        },
+        {
+          "command": "inmemoryFileNotes.refresh.explorer",
+          "group": "navigation",
+          "when": "view == inmemoryFileNotes-explorer"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "inmemoryFileNotes.note.show",
+          "group": "navigation@1",
+          "when": "viewItem =~ /^inmemoryFileNotes-.*item$/"
+        },
+        {
+          "command": "inmemoryFileNotes.note.saveAsFile",
+          "group": "navigation@2",
+          "when": "viewItem =~ /^inmemoryFileNotes-.*item$/"
+        },
+        {
+          "command": "inmemoryFileNotes.note.rename",
+          "group": "5_cutcopypaste@1",
+          "when": "viewItem =~ /^inmemoryFileNotes-.*item$/"
+        },
+        {
+          "command": "inmemoryFileNotes.note.delete",
+          "group": "5_cutcopypaste@2",
+          "when": "viewItem =~ /^inmemoryFileNotes-.*item$/"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "inmemoryFileNotes.note.saveAsFile",
+          "when": "false"
+        },
+        {
+          "command": "inmemoryFileNotes.note.new",
+          "when": "false"
+        },
+        {
+          "command": "inmemoryFileNotes.note.show",
+          "when": "false"
+        },
+        {
+          "command": "inmemoryFileNotes.note.rename",
+          "when": "false"
+        },
+        {
+          "command": "inmemoryFileNotes.note.delete",
+          "when": "false"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "inmemoryFileNotes.note.saveAsFile",
+        "title": "Save As File"
+      },
+      {
+        "command": "inmemoryFileNotes.note.new",
+        "title": "New Note",
+        "icon": {
+          "dark": "resources/new-file.svg",
+          "light": "resources/new-file.svg"
+        }
+      },
+      {
+        "command": "inmemoryFileNotes.refresh.explorer",
+        "title": "Refresh Explorer",
+        "icon": {
+          "dark": "resources/refresh.svg",
+          "light": "resources/refresh.svg"
+        }
+      },
+      {
+        "command": "inmemoryFileNotes.note.show",
+        "title": "Show"
+      },
+      {
+        "command": "inmemoryFileNotes.note.rename",
+        "title": "Rename"
+      },
+      {
+        "command": "inmemoryFileNotes.note.delete",
+        "title": "Delete"
+      }
+    ]
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "lint": "eslint src --ext ts"
+    "lint": "eslint src --ext ts",
+    "publish": "vsce package && vsce publish"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
