@@ -15,6 +15,14 @@
     "url": "https://github.com/ohanedan/vscode-inmemory-file-notes"
   },
   "homepage": "https://github.com/ohanedan/vscode-inmemory-file-notes/blob/master/README.md",
+  "license": "MIT",
+  "keywords": [
+    "note",
+    "productivity",
+    "inmemory",
+    "keep"
+  ],
+  "icon": "resources/logo.png",
   "categories": [
     "Other"
   ],
