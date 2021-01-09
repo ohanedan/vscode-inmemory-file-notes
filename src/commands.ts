@@ -20,7 +20,9 @@ export function registerCommands(context: vscode.ExtensionContext, memfs: MemFS,
                 if (name === undefined) {
                     return false;
                 }
-                memfs.writeFile(memfs.getMemFSUri(name), Buffer.from(''), { create: true, overwrite: false });
+                const uri = memfs.getMemFSUri(name);
+                memfs.writeFile(uri, Buffer.from(''), { create: true, overwrite: false });
+                vscode.commands.executeCommand('vscode.open', uri, { preview: true, viewColumn: vscode.ViewColumn.One });
             });
         }
     ));
