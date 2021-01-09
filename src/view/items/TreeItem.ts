@@ -1,16 +1,26 @@
 import * as vscode from 'vscode';
 
 export default class TreeItem extends vscode.TreeItem {
+	context: vscode.ExtensionContext;
 	parent: TreeItem | undefined;
 	children: TreeItem[] | undefined;
 	uri: vscode.Uri | undefined;
 	treeView: vscode.TreeView<TreeItem>;
 
-	constructor(treeView: vscode.TreeView<TreeItem>, label: string, uri?: vscode.Uri) {
+	constructor(context: vscode.ExtensionContext, treeView: vscode.TreeView<TreeItem>, label: string, uri?: vscode.Uri) {
 		super(label);
+		this.context = context;
 		this.children = [] as TreeItem[];
 		this.uri = uri;
 		this.treeView = treeView;
+
+		if (uri) {
+			this.command = {
+				command: "vscode.open",
+				arguments: [uri, { preview: true, viewColumn: vscode.ViewColumn.One }],
+				title: "Open File"
+			};
+		}
 	}
 
 	addChild(child: TreeItem): TreeItem {

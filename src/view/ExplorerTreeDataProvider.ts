@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
-import { MemFS } from '../../MemFS';
-import TreeDataProvider from '../TreeDataProvider';
-import TreeItem from './TreeItem';
+import { MemFS } from '../MemFS';
+import TreeDataProvider from './TreeDataProvider';
+import TreeItem from './items/TreeItem';
+import FileTreeItem from './items/FileTreeItem';
+import { FORMERR } from 'dns';
 
 export default class ExplorerTreeDataProvider extends TreeDataProvider {
 
@@ -21,7 +23,13 @@ export default class ExplorerTreeDataProvider extends TreeDataProvider {
 	}
 
 	async getData() {
-		this.data = [];
+		const treeItems: FileTreeItem[] = [];
+
+		this.memFS.getFiles().forEach(uri => {
+			treeItems.push(new FileTreeItem(this.context, this.treeView, uri.path.substring(1), uri));
+		});
+
+		this.data = treeItems;
 		this.refresh();
 	}
 }

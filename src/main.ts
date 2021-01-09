@@ -1,12 +1,14 @@
 import * as vscode from 'vscode';
 import { registerCommands } from './commands';
 import { MemFS } from './MemFS';
-import ExplorerTreeDataProvider from './view/items/ExplorerTreeDataProvider';
+import ExplorerTreeDataProvider from './view/ExplorerTreeDataProvider';
 import TreeDataCollector from './view/TreeDataCollector';
 
 export function activate(context: vscode.ExtensionContext) {
-	const memfs = new MemFS();
-	context.subscriptions.push(vscode.workspace.registerFileSystemProvider("inmemory-file-notes", memfs, { isCaseSensitive: true }));
+	const scheme = "inmemory-file-notes";
+
+	const memfs = new MemFS(scheme);
+	context.subscriptions.push(vscode.workspace.registerFileSystemProvider(scheme, memfs, { isCaseSensitive: true }));
 
 	const explorerDataCollector = new TreeDataCollector(context);
 	const explorerTreeView = vscode.window.createTreeView('inmemoryFileNotes-explorer', { treeDataProvider: explorerDataCollector });

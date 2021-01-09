@@ -36,7 +36,7 @@
         {
           "id": "inmemoryFileNotes-explorer",
           "title": "Inmemory File Notes",
-          "icon": "resources/logo.svg"
+          "icon": "resources/svg/logo.svg"
         }
       ]
     },
@@ -115,16 +115,16 @@
         "command": "inmemoryFileNotes.note.new",
         "title": "New Note",
         "icon": {
-          "dark": "resources/new-file.svg",
-          "light": "resources/new-file.svg"
+          "dark": "resources/svg/dark/new-file.svg",
+          "light": "resources/svg/light/new-file.svg"
         }
       },
       {
         "command": "inmemoryFileNotes.refresh.explorer",
         "title": "Refresh Explorer",
         "icon": {
-          "dark": "resources/refresh.svg",
-          "light": "resources/refresh.svg"
+          "dark": "resources/svg/dark/refresh.svg",
+          "light": "resources/svg/light/refresh.svg"
         }
       },
       {

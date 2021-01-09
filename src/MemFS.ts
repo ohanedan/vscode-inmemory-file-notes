@@ -1,8 +1,9 @@
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
+ * 
+ *  edited by ohanedan
  *--------------------------------------------------------------------------------------------*/
-
 
 import * as path from 'path';
 import * as vscode from 'vscode';
@@ -51,6 +52,23 @@ export type Entry = File | Directory;
 export class MemFS implements vscode.FileSystemProvider {
 
     root = new Directory('');
+    scheme: string;
+
+    constructor(scheme: string) {
+        this.scheme = scheme;
+    }
+
+    getMemFSUri(name: string): vscode.Uri {
+        return vscode.Uri.parse(this.scheme + `:/${name}`);
+    }
+
+    getFiles(): vscode.Uri[] {
+        const files: vscode.Uri[] = [];
+        for (const [name] of this.readDirectory(this.getMemFSUri(""))) {
+            files.push(this.getMemFSUri(name));
+        }
+        return files;
+    }
 
     // --- manage file metadata
 
